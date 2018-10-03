@@ -1,2 +1,2 @@
-# Algorithms
+### Algorithms
 Implementing standard algorithms.
