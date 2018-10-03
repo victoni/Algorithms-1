@@ -1,31 +1,21 @@
 //lavishsaluja
 #include<bits/stdc++.h>
 using namespace std;
+#define ln endl
 #define debug1(x) cout<<x<<"\n"
 #define debug2(x,y) cout<<x<<"-->"<<y<<"\n"
 #define debug3(x,y,z) cout<<x<<"-->"<<y<<"-->"<<z<<"\n"
 
-int BinarySearch(int* array, int n,int key)
+int BinarySearch(int* array, int low, int high, int key)
 {
-	int mid,low = 1,high = n;
-	while(low < high)
+	if(high >= low)
 	{
-		mid = (low+high)/2;
+		int mid = (low+high)/2;
 		if(array[mid] == key)
-		{
 			return mid;
-		}
-		else
-		{
-			if(key < array[mid])
-			{
-				high = mid - 1;
-			}
-			else
-			{
-				low = mid + 1;
-			}
-		}
+		if(array[mid] > key)
+			return BinarySearch(array,low,mid-1,key);
+		return BinarySearch(array,mid+1,high,key);
 	}
 	return -1;
 }
@@ -39,13 +29,19 @@ int main(void){
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt","w",stdout);
 	#endif
-	
-	int n;		
+		
+	int n;
 	cin>>n;
-	int array[n],key;
+	int array[n];
 	for(int i = 0; i < n; i ++)
+	{
 		cin>>array[i];
+	}
+	int key;
 	cin>>key;
-	cout<<BinarySearch(array,n,key);
+	
+	int low = 1, high = n;
+	int r = BinarySearch(array, low, high, key);
+	cout<<r;
 	return 0;
 }
